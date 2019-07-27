@@ -3,6 +3,7 @@ import "./Calculator.css";
 import NumberButtons from "./NumberButtons";
 import Operands from "./Operands";
 import Equals from "./EqualsOperand";
+import ClearDisplay from "./ClearDisplay";
 
 class CalculatorGrid extends React.Component {
   state = {
@@ -20,13 +21,14 @@ class CalculatorGrid extends React.Component {
 
   render() {
     const { total } = this.state;
-    const { clickNumber, inputOperand } = this;
+    const { clickNumber, inputOperand, clearDisplay } = this;
     return (
       <div className="calculatorGrid">
         <div className="display">{total}</div>
         <NumberButtons clickNumber={clickNumber} />
         <Operands inputOperand={inputOperand} />
         <Equals returnTotal={this.returnTotal} />
+        <ClearDisplay clearDisplay={clearDisplay} />
       </div>
     );
   }
@@ -36,18 +38,18 @@ class CalculatorGrid extends React.Component {
     this.setState(currentState => {
       if (!currentState.operand.length) {
         currentState.inputA += numInput;
-        console.log(currentState.inputA, "A");
         return { total: currentState.inputA };
       } else {
         currentState.inputB += numInput;
-        console.log(currentState.inputB, "B");
-        return { inputB: currentState.inputB };
+        return { total: currentState.inputB };
       }
     });
   };
 
   inputOperand = operand => {
-    this.setState({ operand }, () => console.log(this.state.operand));
+    this.setState(currentState => {
+      return { inputA: +currentState.total, operand };
+    });
   };
 
   returnTotal = () => {
@@ -58,6 +60,10 @@ class CalculatorGrid extends React.Component {
         inputB: ""
       };
     });
+  };
+
+  clearDisplay = () => {
+    this.setState({ total: 0, inputA: "", inputB: "", operand: "" });
   };
 }
 

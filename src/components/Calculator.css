@@ -9,14 +9,16 @@
   width: 350px;
   height: 400px;
   border: solid;
+  /* justify-content: right; */
 }
 
 .display {
   background: palegreen;
   grid-column: 1/6;
   grid-row: 2/4;
-  margin-left: 300px;
-  margin-top: auto;
+  width: 350px;
+  /* margin-left: 300px; */
+  /* margin-top: auto; */
   font-size: 30px;
 }
 
@@ -100,7 +102,7 @@
   grid-row: 10/11;
 }
 
-.equal {
+.equals {
   grid-column: 5/6;
   grid-row: 10/11;
 }

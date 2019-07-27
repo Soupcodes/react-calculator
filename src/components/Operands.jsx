@@ -1,19 +1,22 @@
 import React from "react";
 
-const Operands = () => {
+const Operands = props => {
   const operands = {
-    decimal: ".",
-    parentheses: "()",
     plus: "+",
     minus: "-",
-    multiply: "x",
-    divide: "/",
-    equal: "="
+    multiply: "*",
+    divide: "/"
   };
 
   return Object.keys(operands).map(operand => {
     return (
-      <button key={operand} className={operand}>
+      <button
+        key={operand}
+        className={operand}
+        onClick={() => {
+          props.inputOperand(operands[operand]);
+        }}
+      >
         {operands[operand]}
       </button>
     );
